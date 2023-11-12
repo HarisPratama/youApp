@@ -63,6 +63,7 @@ export class ChatService {
                 password: 0,
                 email: 0,
                 username: 0,
+                profileImage: 0,
               },
             },
           ],
