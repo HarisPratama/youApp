@@ -8,6 +8,9 @@ export class User {
   @Prop({ default: '' })
   name: string;
 
+  @Prop({ default: '' })
+  clientId: string;
+
   @Prop({ unique: true, required: true })
   username: string;
 

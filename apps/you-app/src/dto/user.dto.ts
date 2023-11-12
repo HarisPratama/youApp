@@ -6,15 +6,16 @@ export class CreateUserDto {
 
 export class UpdateUserDto {
   _id?: string;
-  username?: string;
+  username: string;
   email: string;
-  gender: string;
-  birthDate: Date;
+  gender?: string;
+  birthDate?: Date;
   horoScope?: string;
   zodiac?: string;
-  height: number;
-  weight: number;
+  height?: number;
+  weight?: number;
   interest?: string;
+  clientId?: string;
 }
 
 export class FindUserDto {

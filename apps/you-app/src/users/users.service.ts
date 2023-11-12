@@ -52,7 +52,7 @@ export class UsersService {
     return this.userModel.findOneAndUpdate(
       {
         email: createUserDto.email,
-        _id: createUserDto._id,
+        _id: new Types.ObjectId(createUserDto._id),
       },
       createUserDto,
     );

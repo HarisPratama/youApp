@@ -7,6 +7,10 @@ import { AuthModule } from './auth/auth.module';
 import { UsersModule } from './users/users.module';
 import { ClientProxyFactory, Transport } from '@nestjs/microservices';
 import { ChatController } from './services/chat/chat.controller';
+import { SocketGateway } from './socket/shocket.gateway';
+import { JwtModule, JwtService } from '@nestjs/jwt';
+import { jwtConstants } from './constant';
+import { AuthService } from './auth/auth.service';
 // import { ConfigService } from 'nest-shared';
 // import { ConfigService } from './services/config/config.service';
 
@@ -16,11 +20,22 @@ const dbcloud =
 // const dblocal = 'mongodb://localhost:27017/youapp';
 
 @Module({
-  imports: [MongooseModule.forRoot(dbcloud), AuthModule, UsersModule],
+  imports: [
+    MongooseModule.forRoot(dbcloud),
+    AuthModule,
+    UsersModule,
+    JwtModule.register({
+      global: true,
+      secret: jwtConstants.secret,
+    }),
+  ],
   controllers: [AppController, ChatController],
   providers: [
     AppService,
+    AuthService,
     HashingService,
+    JwtService,
+    SocketGateway,
     {
       provide: 'CHAT_SERVICE',
       useFactory: () => {

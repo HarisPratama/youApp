@@ -14,12 +14,14 @@ import { ClientProxy } from '@nestjs/microservices';
 import { AuthGuard } from '../../auth/auth.guard';
 import { CreateMessageDto, GetmessagesDto } from '../../dto/chat.dto';
 import { UsersService } from '../../users/users.service';
+import { SocketGateway } from '../../socket/shocket.gateway';
 
 @Controller('api')
 export class ChatController {
   constructor(
     @Inject('CHAT_SERVICE') private clienChatService: ClientProxy,
     private userService: UsersService,
+    private readonly socketGateway: SocketGateway,
   ) {}
 
   @UseGuards(AuthGuard)
@@ -72,7 +74,7 @@ export class ChatController {
 
   @UseGuards(AuthGuard)
   @Post('sendMessages')
-  createMessages(@Request() req, @Body() body, @Res() res: Response) {
+  async createMessages(@Request() req, @Body() body, @Res() res: Response) {
     const { receiverId, message } = body;
 
     const data: CreateMessageDto = {
@@ -82,9 +84,23 @@ export class ChatController {
       senderId: req.user._id,
       receiverId,
     };
+    const findReceiver = await this.userService.findUserById(data.receiverId);
     const chatResponse = this.clienChatService.send('send_chat', data);
 
     chatResponse.subscribe((resp) => {
+      if (findReceiver.clientId)
+        this.socketGateway.server
+          .to(findReceiver.clientId)
+          .emit('viewDetailsMessage', {
+            status: 'Success',
+            statusCode: resp.status,
+            data: {
+              user: findReceiver,
+              messages: [data],
+              clientId: findReceiver.clientId,
+            },
+          });
+
       res.status(HttpStatus.OK).json({ status: 'Success', data: resp });
     });
   }

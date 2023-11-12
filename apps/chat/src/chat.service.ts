@@ -96,6 +96,7 @@ export class ChatService {
           { messageId: `${receiverId}-${senderId}` },
         ],
       })
+      .sort({ createdAt: -1 })
       .limit(11);
   }
 
