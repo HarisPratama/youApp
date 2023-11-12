@@ -119,8 +119,8 @@
 				"method": "POST",
 				"header": [],
 				"body": {
-					"mode": "urlencoded",
-					"urlencoded": [
+					"mode": "formdata",
+					"formdata": [
 						{
 							"key": "gender",
 							"value": "male",
@@ -145,6 +145,11 @@
 							"key": "name",
 							"value": "Budi Doremi",
 							"type": "text"
+						},
+						{
+							"key": "profileImage",
+							"type": "file",
+							"src": "/Users/devita/Documents/Screenshot 2023-11-09 at 17.25.48.png"
 						}
 					]
 				},
@@ -178,8 +183,8 @@
 				"method": "POST",
 				"header": [],
 				"body": {
-					"mode": "urlencoded",
-					"urlencoded": [
+					"mode": "formdata",
+					"formdata": [
 						{
 							"key": "gender",
 							"value": "female",
@@ -204,6 +209,11 @@
 							"key": "name",
 							"value": "Devitasari",
 							"type": "text"
+						},
+						{
+							"key": "profileImage",
+							"type": "file",
+							"src": "/Users/devita/Documents/Screenshot 2023-11-09 at 17.40.41.png"
 						}
 					]
 				},

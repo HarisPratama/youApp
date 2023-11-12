@@ -9,6 +9,9 @@ export class User {
   name: string;
 
   @Prop({ default: '' })
+  profileImage: string;
+
+  @Prop({ default: '' })
   clientId: string;
 
   @Prop({ unique: true, required: true })

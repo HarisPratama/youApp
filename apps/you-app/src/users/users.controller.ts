@@ -6,13 +6,16 @@ import {
   Post,
   Request,
   Res,
+  UploadedFile,
   UseGuards,
+  UseInterceptors,
 } from '@nestjs/common';
-import { Response } from 'express';
+import { Response, Express } from 'express';
 import { UsersService } from './users.service';
 import { UpdateUserDto } from '../dto/user.dto';
 import { AuthGuard } from '../auth/auth.guard';
 import { ApiHeader } from '@nestjs/swagger';
+import { FileInterceptor } from '@nestjs/platform-express';
 
 @ApiHeader({
   name: 'Authorization',
@@ -24,12 +27,16 @@ export class UsersController {
 
   @UseGuards(AuthGuard)
   @Post('createProfile')
+  @UseInterceptors(FileInterceptor('profileImage'))
   async createProfile(
     @Body() updateUserDto: UpdateUserDto,
+    @UploadedFile()
+    profileImage: Express.Multer.File,
     @Request() req,
     @Res() res: Response,
   ) {
     const payload = {
+      profileImage: profileImage.buffer.toString(),
       ...updateUserDto,
       birthDate: new Date(updateUserDto.birthDate),
       ...req.user,
@@ -71,12 +78,15 @@ export class UsersController {
 
   @UseGuards(AuthGuard)
   @Post('updateProfile')
+  @UseInterceptors(FileInterceptor('profileImage'))
   async updateProfile(
     @Body() updateUserDto: UpdateUserDto,
+    @UploadedFile() profileImage: Express.Multer.File,
     @Request() req,
     @Res() res: Response,
   ) {
     const payload = {
+      profileImage: profileImage.buffer.toString(),
       ...updateUserDto,
       birthDate: new Date(updateUserDto.birthDate),
       ...req.user,

@@ -7,14 +7,20 @@ export class CreateUserDto {
 }
 
 export class UpdateUserDto {
-  // @ApiProperty({ description: 'Not required' })
-  // _id?: string;
+  @ApiProperty({ description: 'Not required' })
+  _id?: string;
 
-  // @ApiProperty()
-  // username: string;
+  @ApiProperty()
+  name?: string;
 
-  // @ApiProperty()
-  // email: string;
+  @ApiProperty()
+  profileImage?: File;
+
+  @ApiProperty()
+  username?: string;
+
+  @ApiProperty()
+  email?: string;
 
   @ApiProperty()
   gender?: string;
