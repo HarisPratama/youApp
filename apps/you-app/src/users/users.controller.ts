@@ -12,7 +12,12 @@ import { Response } from 'express';
 import { UsersService } from './users.service';
 import { UpdateUserDto } from '../dto/user.dto';
 import { AuthGuard } from '../auth/auth.guard';
+import { ApiHeader } from '@nestjs/swagger';
 
+@ApiHeader({
+  name: 'Authorization',
+  description: 'Value is Bearer {{access_token}}',
+})
 @Controller('api')
 export class UsersController {
   constructor(private userService: UsersService) {}
@@ -24,7 +29,7 @@ export class UsersController {
     @Request() req,
     @Res() res: Response,
   ) {
-    const payload: UpdateUserDto = {
+    const payload = {
       ...updateUserDto,
       birthDate: new Date(updateUserDto.birthDate),
       ...req.user,

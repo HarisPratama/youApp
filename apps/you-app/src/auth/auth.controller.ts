@@ -1,8 +1,9 @@
-import { Controller, Post, Req, Res } from '@nestjs/common';
+import { Body, Controller, HttpStatus, Post, Res } from '@nestjs/common';
 import { JwtService } from '@nestjs/jwt';
-import { Request, Response } from 'express';
+import { Response } from 'express';
 import { HashingService } from '../helpers/hashing/hashing.service';
 import { UsersService } from '../users/users.service';
+import { LoginDto, RegisterDto } from '../dto/auth.dto';
 
 @Controller('api')
 export class AuthController {
@@ -13,40 +14,47 @@ export class AuthController {
   ) {}
 
   @Post('register')
-  async register(@Req() req: Request, @Res() res: Response) {
-    const { email, password, username } = req.body;
-    const hashPass = await this.hashingService.encrypt(password);
+  async register(@Body() body: RegisterDto, @Res() res: Response) {
+    try {
+      const { email, password, username } = body;
+      const hashPass = await this.hashingService.encrypt(password);
 
-    const findUserEmail = await this.userService.findUserByEmail(email);
-    const findUserByUsername =
-      await this.userService.findUserByUsername(username);
+      const findUserEmail = await this.userService.findUserByEmail(email);
+      const findUserByUsername =
+        await this.userService.findUserByUsername(username);
 
-    if (
-      (findUserEmail && findUserEmail.email) ||
-      (findUserByUsername && findUserByUsername.username)
-    ) {
-      res.status(200).json({
+      if (
+        (findUserEmail && findUserEmail.email) ||
+        (findUserByUsername && findUserByUsername.username)
+      ) {
+        res.status(200).json({
+          status: 'Error',
+          message: 'User already registered',
+        });
+      } else {
+        const FindUserDto = {
+          email,
+          password: hashPass,
+          username,
+        };
+
+        const createUser = await this.userService.create(FindUserDto);
+        res.status(201).json({
+          status: 'Success',
+          createUser,
+        });
+      }
+    } catch (error) {
+      res.status(HttpStatus.BAD_REQUEST).json({
         status: 'Error',
-        message: 'User already registered',
-      });
-    } else {
-      const FindUserDto = {
-        email,
-        password: hashPass,
-        username,
-      };
-
-      const createUser = await this.userService.create(FindUserDto);
-      res.status(201).json({
-        status: 'Success',
-        createUser,
+        message: error && error.message ? error.message : 'Bad Request',
       });
     }
   }
 
   @Post('login')
-  async login(@Req() req: Request, @Res() res: Response) {
-    const { email, password } = req.body;
+  async login(@Body() body: LoginDto, @Res() res: Response) {
+    const { email, password } = body;
 
     const findUser = await this.userService.findUserByEmailOrUsername(email);
 

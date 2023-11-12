@@ -12,10 +12,19 @@ import {
 import { Response } from 'express';
 import { ClientProxy } from '@nestjs/microservices';
 import { AuthGuard } from '../../auth/auth.guard';
-import { CreateMessageDto, GetmessagesDto } from '../../dto/chat.dto';
+import {
+  CreateMessageDto,
+  GetmessagesDto,
+  SendMessageDto,
+} from '../../dto/chat.dto';
 import { UsersService } from '../../users/users.service';
 import { SocketGateway } from '../../socket/shocket.gateway';
+import { ApiHeader } from '@nestjs/swagger';
 
+@ApiHeader({
+  name: 'Authorization',
+  description: 'Value is Bearer {{access_token}}',
+})
 @Controller('api')
 export class ChatController {
   constructor(
@@ -74,7 +83,11 @@ export class ChatController {
 
   @UseGuards(AuthGuard)
   @Post('sendMessages')
-  async createMessages(@Request() req, @Body() body, @Res() res: Response) {
+  async createMessages(
+    @Request() req,
+    @Body() body: SendMessageDto,
+    @Res() res: Response,
+  ) {
     const { receiverId, message } = body;
 
     const data: CreateMessageDto = {

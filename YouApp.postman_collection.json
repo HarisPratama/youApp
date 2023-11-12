@@ -1,0 +1,369 @@
+{
+	"info": {
+		"_postman_id": "f0f791dd-f77f-470f-8306-566fd2c86b42",
+		"name": "YouApp",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+		"_exporter_id": "15642476"
+	},
+	"item": [
+		{
+			"name": "/",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "localhost:3000",
+					"host": [
+						"localhost"
+					],
+					"port": "3000"
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Register",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "urlencoded",
+					"urlencoded": [
+						{
+							"key": "email",
+							"value": "budi@maildrop.cc",
+							"type": "text"
+						},
+						{
+							"key": "password",
+							"value": "123456",
+							"type": "text"
+						},
+						{
+							"key": "name",
+							"value": "Haris Pratama",
+							"type": "text",
+							"disabled": true
+						},
+						{
+							"key": "username",
+							"value": "budi",
+							"type": "text"
+						}
+					]
+				},
+				"url": {
+					"raw": "localhost:3000/api/register",
+					"host": [
+						"localhost"
+					],
+					"port": "3000",
+					"path": [
+						"api",
+						"register"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Login",
+			"request": {
+				"auth": {
+					"type": "noauth"
+				},
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "urlencoded",
+					"urlencoded": [
+						{
+							"key": "email",
+							"value": "budi",
+							"type": "text"
+						},
+						{
+							"key": "password",
+							"value": "123456",
+							"type": "text"
+						}
+					]
+				},
+				"url": {
+					"raw": "localhost:3000/api/login",
+					"host": [
+						"localhost"
+					],
+					"port": "3000",
+					"path": [
+						"api",
+						"login"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Create Profile",
+			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": [
+						{
+							"key": "token",
+							"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJlbWFpbCI6ImJ1ZGlAbWFpbGRyb3AuY2MiLCJ1c2VybmFtZSI6ImJ1ZGkiLCJfaWQiOiI2NTUwMzRhOTZiYTk5MGQyZThmNDFhZjIiLCJpYXQiOjE2OTk3NTU2NDB9.MxOMts0GeZ0FlLNdJMa1f3OJ3h33vODv4eUbsqXzYL4",
+							"type": "string"
+						}
+					]
+				},
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "urlencoded",
+					"urlencoded": [
+						{
+							"key": "gender",
+							"value": "male",
+							"type": "text"
+						},
+						{
+							"key": "birthDate",
+							"value": "11/30/2001",
+							"type": "text"
+						},
+						{
+							"key": "height",
+							"value": "170",
+							"type": "text"
+						},
+						{
+							"key": "weight",
+							"value": "50",
+							"type": "text"
+						},
+						{
+							"key": "name",
+							"value": "Budi Doremi",
+							"type": "text"
+						}
+					]
+				},
+				"url": {
+					"raw": "localhost:3000/api/createProfile",
+					"host": [
+						"localhost"
+					],
+					"port": "3000",
+					"path": [
+						"api",
+						"createProfile"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Update Profile",
+			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": [
+						{
+							"key": "token",
+							"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJlbWFpbCI6ImRldml0YUBtYWlsZHJvcC5jYyIsInVzZXJuYW1lIjoiZGV2aXRhIiwiX2lkIjoiNjU0ZGFhNzU1MzFiMGUzZTg0YjczNTNlIiwiaWF0IjoxNjk5Njc5Mjk5fQ.QwMXl1-vxKXGA80N1O9bRVjrPaIFRdyzUZvssuSf124",
+							"type": "string"
+						}
+					]
+				},
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "urlencoded",
+					"urlencoded": [
+						{
+							"key": "gender",
+							"value": "female",
+							"type": "text"
+						},
+						{
+							"key": "birthDate",
+							"value": "09/07/1995",
+							"type": "text"
+						},
+						{
+							"key": "height",
+							"value": "170",
+							"type": "text"
+						},
+						{
+							"key": "weight",
+							"value": "50",
+							"type": "text"
+						},
+						{
+							"key": "name",
+							"value": "Devitasari",
+							"type": "text"
+						}
+					]
+				},
+				"url": {
+					"raw": "localhost:3000/api/updateProfile",
+					"host": [
+						"localhost"
+					],
+					"port": "3000",
+					"path": [
+						"api",
+						"updateProfile"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Get Profile",
+			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": [
+						{
+							"key": "token",
+							"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJlbWFpbCI6ImRldml0YUBtYWlsZHJvcC5jYyIsInVzZXJuYW1lIjoiZGV2aXRhIiwiX2lkIjoiNjU0ZGFhNzU1MzFiMGUzZTg0YjczNTNlIiwiaWF0IjoxNjk5NzA0OTc4fQ.4xupixYLUd1GnzFAyynvwfmbJ69CjI9GMCHYUO1-Az8",
+							"type": "string"
+						}
+					]
+				},
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "localhost:3000/api/getProfile",
+					"host": [
+						"localhost"
+					],
+					"port": "3000",
+					"path": [
+						"api",
+						"getProfile"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Get Messages",
+			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": [
+						{
+							"key": "token",
+							"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJlbWFpbCI6ImthcmFwYWlAbWFpbGRyb3AuY2MiLCJ1c2VybmFtZSI6ImthcmFwYWkiLCJfaWQiOiI2NTRkZWE4OWQzZTY3N2I4Y2Q2ODg3NGEiLCJpYXQiOjE2OTk3MDYzMDF9.QgUQa5pdsFOigJIl1u1NvmVcBAYRLEIIslwm0TpeSPs",
+							"type": "string"
+						}
+					]
+				},
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "localhost:3000/api/viewMessages",
+					"host": [
+						"localhost"
+					],
+					"port": "3000",
+					"path": [
+						"api",
+						"viewMessages"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Get Detail Message",
+			"protocolProfileBehavior": {
+				"disableBodyPruning": true
+			},
+			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": [
+						{
+							"key": "token",
+							"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJlbWFpbCI6ImthcmFwYWlAbWFpbGRyb3AuY2MiLCJ1c2VybmFtZSI6ImthcmFwYWkiLCJfaWQiOiI2NTRkZWE4OWQzZTY3N2I4Y2Q2ODg3NGEiLCJpYXQiOjE2OTk3MDYzMDF9.QgUQa5pdsFOigJIl1u1NvmVcBAYRLEIIslwm0TpeSPs",
+							"type": "string"
+						}
+					]
+				},
+				"method": "GET",
+				"header": [],
+				"body": {
+					"mode": "urlencoded",
+					"urlencoded": [
+						{
+							"key": "receiverId",
+							"value": "654daa75531b0e3e84b7353e",
+							"type": "text"
+						}
+					]
+				},
+				"url": {
+					"raw": "localhost:3000/api/viewDetailsMessage",
+					"host": [
+						"localhost"
+					],
+					"port": "3000",
+					"path": [
+						"api",
+						"viewDetailsMessage"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Post Messages",
+			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": [
+						{
+							"key": "token",
+							"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJlbWFpbCI6ImthcmFwYWlAbWFpbGRyb3AuY2MiLCJ1c2VybmFtZSI6ImthcmFwYWkiLCJfaWQiOiI2NTRkZWE4OWQzZTY3N2I4Y2Q2ODg3NGEiLCJpYXQiOjE2OTk3MDYzMDF9.QgUQa5pdsFOigJIl1u1NvmVcBAYRLEIIslwm0TpeSPs",
+							"type": "string"
+						}
+					]
+				},
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "urlencoded",
+					"urlencoded": [
+						{
+							"key": "receiverId",
+							"value": "654c889c370cf22e0f4637f2",
+							"type": "text"
+						},
+						{
+							"key": "message",
+							"value": "Ris Gimana Kabar ris",
+							"type": "text"
+						}
+					]
+				},
+				"url": {
+					"raw": "localhost:3000/api/sendMessages",
+					"host": [
+						"localhost"
+					],
+					"port": "3000",
+					"path": [
+						"api",
+						"sendMessages"
+					]
+				}
+			},
+			"response": []
+		}
+	]
+}
