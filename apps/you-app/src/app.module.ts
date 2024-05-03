@@ -15,7 +15,7 @@ import { AuthService } from './auth/auth.service';
 // import { ConfigService } from './services/config/config.service';
 
 const dbcloud =
-  'mongodb+srv://haris:F754oGsUHPVKgEEt@cluster0.r8pel.mongodb.net/youapp?retryWrites=true&w=majority';
+  'mongodb+srv://haris:3ynawF1zbEPR74IK@cluster0.r8pel.mongodb.net/youapp?retryWrites=true&w=majority&appName=Cluster0';
 
 // const dblocal = 'mongodb://localhost:27017/youapp';
 
@@ -44,7 +44,8 @@ const dbcloud =
           transport: Transport.RMQ,
           options: {
             urls: [
-              'amqps://fiviwfpt:C041g_gFLrSUmYA4tSh-xlss1QSiH_FH@jackal.rmq.cloudamqp.com/fiviwfpt',
+              'amqp://172.17.0.2:5672',
+              // 'amqps://ynvyudss:NplTt26iNlrD9BJadzgZJkR3Akqirftn@armadillo.rmq.cloudamqp.com/ynvyudss',
             ],
             queue: 'chat_queue',
             queueOptions: {

@@ -36,10 +36,21 @@ export class ChatController {
   @UseGuards(AuthGuard)
   @Get('viewMessages')
   getMessages(@Request() req, @Res() res: Response) {
-    const chatResponse = this.clienChatService.send('get_messages', req.user);
+    console.log('here');
 
-    chatResponse.subscribe((resp) => {
-      res.status(HttpStatus.OK).json({ status: 'Success', data: resp });
+    const chatResponse = this.clienChatService.send('get_messages', req.user);
+    console.log(chatResponse, '<< chatResponse');
+
+    chatResponse.subscribe({
+      next(resp) {
+        res.status(HttpStatus.OK).json({ status: 'Success', data: resp });
+      },
+      error(err) {
+        console.log(err);
+        res
+          .status(HttpStatus.BAD_REQUEST)
+          .json({ status: 'Error', message: JSON.stringify(err) });
+      },
     });
   }
 

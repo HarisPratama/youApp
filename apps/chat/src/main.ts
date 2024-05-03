@@ -11,7 +11,8 @@ async function bootstrap() {
       transport: Transport.RMQ,
       options: {
         urls: [
-          'amqps://fiviwfpt:C041g_gFLrSUmYA4tSh-xlss1QSiH_FH@jackal.rmq.cloudamqp.com/fiviwfpt',
+          'amqp://172.17.0.2:5672',
+          // 'amqps://ynvyudss:NplTt26iNlrD9BJadzgZJkR3Akqirftn@armadillo.rmq.cloudamqp.com/ynvyudss',
         ],
         queue: 'chat_queue',
         queueOptions: {
