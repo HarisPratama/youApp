@@ -14,7 +14,7 @@ export class UpdateUserDto {
   name?: string;
 
   @ApiProperty()
-  profileImage?: File;
+  profileImage?: string;
 
   @ApiProperty()
   username?: string;
